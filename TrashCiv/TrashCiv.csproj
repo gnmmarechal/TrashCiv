@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CivEngine\CivEngine.csproj">
+      <Project>{d409bb2f-759b-43d6-b63e-140b1c3d2c57}</Project>
+      <Name>CivEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
