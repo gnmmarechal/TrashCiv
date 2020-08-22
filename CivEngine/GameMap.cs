@@ -58,6 +58,15 @@ namespace CivEngineLib
                     {
                         
                     }
+
+                    try
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Down, tileGrid[i][j + 1]);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
             }
             // Create other features and populate tiles with resources and stuff
