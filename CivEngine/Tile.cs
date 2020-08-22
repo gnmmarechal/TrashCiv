@@ -55,6 +55,37 @@ namespace CivEngineLib
             return null;
         }
 
+        public void SetNeighbour(NeighbourDirection n, Tile tile)
+        {
+            switch (n)
+            {
+                case NeighbourDirection.Up:
+                    upNeighbour = tile;
+                    break;
+                case NeighbourDirection.Down:
+                    downNeighbour = tile;
+                    break;
+                case NeighbourDirection.Left:
+                    leftNeighbour = tile;
+                    break;
+                case NeighbourDirection.Right:
+                    rightNeighbour = tile;
+                    break;
+                case NeighbourDirection.UpRight:
+                    upRightNeighbour = tile;
+                    break;
+                case NeighbourDirection.UpLeft:
+                    upLeftNeighbour = tile;
+                    break;
+                case NeighbourDirection.DownRight:
+                    downRightNeighbour = tile;
+                    break;
+                case NeighbourDirection.DownLeft:
+                    downLeftNeighbour = tile;
+                    break;
+            }
+        }
+
         public override string ToString()
         {
             return "[" + this.tileType + "]";

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CivEngineLib
 {
     public class GameMap
     {
-        private static readonly int predefX = 100, predefY = 100;
+        private static readonly int predefX = 10, predefY = 10;
 
         private Tile[][] tileGrid;
         private long mapSeed;
@@ -21,10 +23,44 @@ namespace CivEngineLib
                 Tile[] tempGrid = new Tile[sizeY];
                 for (int j = 0; j < sizeY; j++)
                 {
-                    tempGrid[j] = new Tile(Tile.TileType.Plains, new System.Collections.Generic.Dictionary<Tile.Resource, int>());
+                    tempGrid[j] = new Tile(Tile.TileType.Plains, new Dictionary<Tile.Resource, int>());
                 }
                 tileGrid[i] = tempGrid;
             }
+
+            // Link the nodes
+            for (int i = 0; i < sizeX; i++)
+            {
+                for (int j = 0; j < sizeY; j++)
+                {
+                    try
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Right, tileGrid[i][j + 1]);
+                    } catch (Exception)
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Right, tileGrid[i][0]);
+                    }
+
+                    try
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Left, tileGrid[i][j - 1]);
+                    }
+                    catch (Exception)
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Left, tileGrid[i][sizeY-1]);
+                    }
+
+                    try
+                    {
+                        tileGrid[i][j].SetNeighbour(Tile.NeighbourDirection.Up, tileGrid[i-1][j]);
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
+            }
+            // Create other features and populate tiles with resources and stuff
 
         }
 
