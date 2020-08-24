@@ -26,6 +26,15 @@ namespace CivEngineLib
             this.tileType = tileType;
         }
 
+        public void SetType(TileType t)
+        {
+            this.tileType = t;
+        }
+
+        public TileType GetTileType()
+        {
+            return tileType;
+        }
         public void SetResource(Resource r, int count)
         {
             resourceList.Add(r, count);
