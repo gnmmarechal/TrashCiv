@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace CivEngineLib
 {
@@ -50,7 +51,28 @@ namespace CivEngineLib
             }
         }
 
-
+        public System.Drawing.Bitmap GetMapBitmap()
+        {
+            System.Drawing.Bitmap b = new System.Drawing.Bitmap(this.gameMap.getX(), this.gameMap.getY());
+            for (int i = 0; i < this.gameMap.getX(); i++)
+            {
+                for (int j = 0; j < this.gameMap.getY(); j++)
+                {
+                    Color c = Color.Black;
+                    switch(this.gameMap.GetTile(i, j).GetTileType())
+                    {
+                        case Tile.TileType.Water:
+                            c = Color.Blue;
+                            break;
+                        case Tile.TileType.Plains:
+                            c = Color.Yellow;
+                            break;
+                    }
+                    b.SetPixel(i, j, c);
+                }
+            }
+            return b;
+        }
 
         public void RunNextTurn()
         {

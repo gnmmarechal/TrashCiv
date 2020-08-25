@@ -7,7 +7,7 @@ namespace CivEngineLib
 {
     public class GameMap
     {
-        private static readonly int predefX = 50, predefY = 10;
+        private static readonly int predefX = 500, predefY = 100;
 
         private Tile[][] tileGrid;
         private long mapSeed;
@@ -113,16 +113,24 @@ namespace CivEngineLib
 
             // Generate water: Pick a center and go around to build a blob
             Random r = new Random((int)seed);
-            int oceanCount = r.Next(5);
+            int oceanCount = r.Next(10);
+            Console.WriteLine("Ocean count: " + oceanCount);
+            Thread.Sleep(100);
             for (int i = 0; i < oceanCount; i++)
             {
                 int currentX = r.Next(sizeX);
                 int currentY = r.Next(sizeY);
                 int[] ogCoords = { currentX, currentY };
-                int oceanRadius = r.Next(4); // r.Next(3)
-                Console.WriteLine("{0} : {1}", currentX, currentY);
+                int oceanRadius = r.Next(50); // r.Next(3)
+                Console.WriteLine("Ocean radius: " + oceanRadius);
+                //Console.WriteLine("{0} : {1}", currentX, currentY);
                 SetTileRecursive(Tile.TileType.Water, 50, oceanRadius, tileGrid[currentX][currentY]);
             }
+        }
+
+        public Tile GetTile(int i, int j)
+        {
+            return tileGrid[i][j];
         }
 
         private void SetTileRecursive(Tile.TileType type, int probability, int maxRadius, Tile startingTile)
@@ -166,6 +174,16 @@ namespace CivEngineLib
                 Console.WriteLine(s);
             }
             return this.ToString();
+        }
+
+        public int getX()
+        {
+            return tileGrid.Length;
+        }
+
+        public int getY()
+        {
+            return tileGrid[0].Length;
         }
         public static GameMap GenerateMap()
         {
